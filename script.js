@@ -1,6 +1,7 @@
 //accessing all the neccesary DOM element 
 const checkBtn = document.getElementById("enter-btn");
 const dob = document.getElementById("dob");
+const main = document.getElementById("main");
 
 let actYear = 0;
 let actMonth = 0;
@@ -8,11 +9,12 @@ let actDay = 0;
 let cond = true;
 let monthDay;
 
-checkBtn.addEventListener("click", () => {
-    // setInterval(()=>{
-    //     const getDate = new Date();
+const displayDob=(year,month,day)=>{
+    main.innerHTML=`<p>You have lived ${year} years ${month} months and ${day} days</p>`;
+}
 
-    // },1000)
+checkBtn.addEventListener("click", () => {
+
     const getDate = new Date();
     const curYear = getDate.getFullYear();
     const curMonth = getDate.getMonth() + 1;
@@ -25,16 +27,15 @@ checkBtn.addEventListener("click", () => {
     actYear = curYear - dobArr[0] - 1;
     /**
      2005 11 29      2024 06 11
-     2023 11 29          
+     2023 11 29      18 6 15    
     **/
-    console.log('hai');
     while (cond) {
+        dobArr[1] += 1;
+        actMonth++;
         if (dobArr[1] == 12)
             dobArr[1] = 1;
         if (dobArr[1] == curMonth)
             cond = false;
-        dobArr[1] += 1;
-        actMonth++;
     }
     cond = true;
     while (cond) {
@@ -51,7 +52,5 @@ checkBtn.addEventListener("click", () => {
         dobArr[2] += 1;
         actDay++;
     }
-    console.log(actYear, actMonth, actDay);
-    // debugger;
-
+    displayDob(actYear, actMonth, actDay + 1)
 })
